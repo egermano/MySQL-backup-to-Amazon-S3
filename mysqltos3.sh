@@ -4,6 +4,8 @@
 # Under a MIT license
 
 # change these variables to what you need
+MYSQLHOST=host
+MYSQLPORT=3306
 MYSQLROOT=root
 MYSQLPASS=password
 S3BUCKET=bucketname
@@ -28,7 +30,7 @@ if [ ${PERIOD} = "auto" ]; then
         	PERIOD=week
 	else
        		PERIOD=day
-	fi	
+	fi
 fi
 
 echo "Selected period: $PERIOD."
@@ -36,7 +38,7 @@ echo "Selected period: $PERIOD."
 echo "Starting backing up the database to a file..."
 
 # dump all databases
-${MYSQLDUMPPATH}mysqldump --quick --user=${MYSQLROOT} --password=${MYSQLPASS} ${DATABASE} > ${TMP_PATH}${FILENAME}.sql
+${MYSQLDUMPPATH}mysqldump --quick --host=${MYSQLHOST} --port=${MYSQLPORT} --user=${MYSQLROOT} --password=${MYSQLPASS} ${DATABASE} > ${TMP_PATH}${FILENAME}.sql
 
 echo "Done backing up the database to a file."
 echo "Starting compression..."
